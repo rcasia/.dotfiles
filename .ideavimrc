@@ -1,0 +1,45 @@
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+set scrolloff=15
+" set clipboard+=unnamed
+set clipboard=unnamedplus
+
+set ignorecase
+set smartcase
+
+imap jj <Esc>
+imap kk <Esc>
+imap jk <Esc>
+imap kj <Esc>
+      
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+map gi <Action>(GotoImplementation)
+map <space> <leader>
+map <leader>tr <Action>(RunClass)
+map <leader>tt <Action>(Rerun)
+map <Leader>rr <Action>(Refactorings.QuickListPopupAction)
+map <Leader>rn <Action>(RenameElement)
+map <Leader>rf <Action>(com.github.lipiridi.spotless.applier.action.ReformatFileAction)
+map <Leader>xx <Action>(ShowErrorDescription)
+map zp <Action>(TogglePresentationMode)
+map zz <Action>(ToggleZenMode)
+map gi <Action>(GotoImplementation)
+map gr <Action>(GotoDeclaration)
+map C-o <Action>(Back)
+map TAB <Action>(Forward)
+map ff <Action>(SearchEverywhere)
+map fg <Action>(FindInPath)
+map ee <Action>(EvaluateExpression)
+map ñ <Action>(ToggleLineBreakpoint)
+
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+set commentary
+set sneak
