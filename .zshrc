@@ -130,3 +130,5 @@ export EDITOR=nvim
 alias db='nvim -c "DBUI"'
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+alias luamake="/home/rcasia/REPOS/opensource/luamake/luamake"
