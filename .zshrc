@@ -132,3 +132,26 @@ alias db='nvim -c "DBUI"'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 alias luamake="/home/rcasia/REPOS/opensource/luamake/luamake"
+
+# go PATH
+export PATH=$PATH:/usr/local/go/bin
+
+function execute_tmux_sessionizer() {
+    # Ignora cualquier entrada actual
+    zle -I
+
+    # Ejecuta el script y captura su salida
+    local cmd=$(~/scripts/goto-directory)
+
+    # Si el comando no está vacío, insértalo en el BUFFER y ejecútalo
+    if [[ -n $cmd ]]; then
+        BUFFER="$cmd"
+        zle accept-line
+    else
+        zle reset-prompt
+    fi
+ 
+}
+zle -N execute_tmux_sessionizer
+
+bindkey '^F' execute_tmux_sessionizer
