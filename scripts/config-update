@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function config {
+   /usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" "$@"
+}
+
+# Check if the repository is clean
+if ! output=$(config status --porcelain) || [ -n "$output" ]; then
+    # Adds all the files in the repository, excluiding non-tracked files
+    config add -u
+
+    config commit -m "triggered update at: $(date '+%Y-%m-%d %H:%M:%S')"
+
+    config push
+fi
