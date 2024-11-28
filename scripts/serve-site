@@ -1,0 +1,42 @@
+#!/bin/bash
+
+DEFAULT_PORT=4444
+
+# Función para comprobar si Python está instalado
+check_python() {
+    if command -v python3 &> /dev/null; then
+        echo "Usando Python 3."
+        PYTHON_CMD="python3"
+    elif command -v python &> /dev/null; then
+        echo "Usando Python 2."
+        PYTHON_CMD="python"
+    else
+        echo "Python no está instalado. Por favor, instala Python para usar este script."
+        exit 1
+    fi
+}
+
+# Función para iniciar el servidor HTTP
+start_server() {
+    # Obtiene el directorio actual si no se especifica otro
+    local folder=${1:-$(pwd)}
+    local port=${2:-$DEFAULT_PORT}
+
+    # Comprueba si el directorio existe
+    if [[ ! -d "$folder" ]]; then
+        echo "El directorio $folder no existe. Por favor, verifica la ruta."
+        exit 1
+    fi
+
+    # Inicia el servidor
+    echo "Iniciando el servidor HTTP en el directorio $folder en el puerto $port..."
+    cd "$folder" || exit
+    $PYTHON_CMD -m http.server "$port"
+}
+
+# Verifica que Python está instalado
+check_python
+
+# Llama a la función para iniciar el servidor
+# Parámetros opcionales: carpeta y puerto
+start_server "$1" "$2"
